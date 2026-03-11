@@ -1,33 +1,35 @@
 body { background-color: #0d1117; color: #c9d1d9; font-family: -apple-system, sans-serif; display: flex; justify-content: center; padding: 20px; margin: 0; }
-.container { max-width: 500px; width: 100%; border: 1px solid #30363d; padding: 25px; border-radius: 8px; background-color: #161b22; }
-h1 { font-size: 20px; color: #58a6ff; margin: 0; }
-.subtitle { color: #8b949e; font-size: 12px; font-family: monospace; margin-bottom: 10px; }
-
-/* 用户名输入框样式 */
-.user-input-area { margin-bottom: 20px; }
-#username {
-    width: 100%;
-    background-color: #0d1117;
-    border: 1px solid #30363d;
-    padding: 10px;
-    color: #c9d1d9;
-    border-radius: 6px;
-    box-sizing: border-box;
-    outline: none;
-}
-#username:focus { border-color: #58a6ff; }
-
-.progress-bar { width: 100%; height: 5px; background-color: #30363d; border-radius: 3px; }
-.progress-fill { width: 0%; height: 100%; background-color: #238636; transition: width 0.3s; }
-.question-group { margin-top: 25px; padding-bottom: 15px; border-bottom: 1px solid #21262d; }
-label { font-weight: 600; font-size: 14px; margin-bottom: 10px; display: block; }
-.options { line-height: 2; color: #8b949e; font-size: 13px; }
-input[type="radio"]:checked + label { color: #58a6ff; font-weight: bold; }
-button { margin-top: 30px; background-color: #238636; color: white; border: 1px solid #30363d; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; }
+.container { max-width: 500px; width: 100%; border: 1px solid #30363d; padding: 25px; border-radius: 8px; background-color: #161b22; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 .hidden { display: none; }
-#result { text-align: center; padding: 20px; }
-#heart-image-container img { max-width: 150px; margin-top: 20px; border-radius: 10px; box-shadow: 0 0 15px rgba(88,166,255,0.2); }
-.retry { color: #8b949e; margin-top: 20px; cursor: pointer; text-decoration: underline; font-size: 11px; }
-.flash-red { animation: screenFlash 0.5s ease-out; }
-@keyframes screenFlash { 0% { background-color: #f85149; } 100% { background-color: #0d1117; } }
+
+h1, h2 { color: #58a6ff; text-align: center; }
+.subtitle { text-align: center; color: #8b949e; font-size: 12px; margin-bottom: 20px; }
+
+/* 输入框 & 按钮 */
+.user-input-area { display: flex; flex-direction: column; gap: 10px; }
+input { background: #0d1117; border: 1px solid #30363d; padding: 12px; color: white; border-radius: 6px; }
+button { cursor: pointer; border-radius: 6px; font-weight: bold; transition: 0.2s; border: 1px solid #30363d; padding: 12px; margin-top: 10px; }
+.btn-primary { background: #238636; color: white; width: 100%; }
+.btn-void { background: #58a6ff; color: #0d1117; width: 100%; font-size: 16px; margin-top: 20px; }
+.btn-outline { background: transparent; color: #8b949e; width: 100%; }
+
+/* 问卷样式 */
+.header-info { margin-bottom: 20px; font-size: 12px; color: #8b949e; }
+.progress-bar { width: 100%; height: 4px; background: #30363d; margin-top: 5px; }
+.progress-fill { height: 100%; background: #238636; width: 0%; transition: 0.3s; }
+.question-group { margin-top: 20px; border-bottom: 1px solid #21262d; padding-bottom: 15px; }
+.options { line-height: 1.8; font-size: 13px; margin-top: 8px; }
+
+/* 个人主页 & 排行榜 */
+.profile-card { background: #0d1117; padding: 20px; border-radius: 8px; margin: 20px 0; border: 1px dashed #30363d; }
+.nav-buttons { display: flex; flex-direction: column; gap: 10px; }
+#leaderboard-list { list-style: none; padding: 0; }
+#leaderboard-list li { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #30363d; font-size: 14px; }
+
+#heart-image-container img { max-width: 120px; display: block; margin: 20px auto; border-radius: 10px; }
+
+/* 闪红 */
+.flash-red { animation: screenFlash 0.5s; }
+@keyframes screenFlash { 0% { background: #f85149; } 100% { background: #0d1117; } }
+
 

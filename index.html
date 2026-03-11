@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body id="main-body">
-    <audio id="emo-audio" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
+    <audio id="emo-audio" src="ding.mp4" preload="auto"></audio>
 
     <div class="container">
         <header>
             <h1>Commit Your Soul</h1>
-            <p class="subtitle">正在同步精神状态...</p>
+            <p class="subtitle">正在同步虚无感...</p>
             <div class="progress-bar">
                 <div class="progress-fill" id="progress"></div>
             </div>
@@ -24,7 +24,7 @@
                 <div class="options">
                     <input type="radio" name="q1" id="q1a" onclick="updateProgress()"> <label for="q1a">A. 尿急 (底层驱动)</label><br>
                     <input type="radio" name="q1" id="q1b" onclick="updateProgress()"> <label for="q1b">B. 还没活够 (系统异常)</label><br>
-                    <input type="radio" name="q1" id="q1c" onclick="updateProgress()"> <label for="q1c">C. 纯粹是睡不着了 (硬件老化)</label>
+                    <input type="radio" name="q1" id="q1c" onclick="updateProgress()"> <label for="q1c">C. 睡不着了 (硬件老化)</label>
                 </div>
             </div>
 
@@ -32,7 +32,7 @@
                 <label>2. 面对期末考试，你的策略是？</label>
                 <div class="options">
                     <input type="radio" name="q2" id="q2a" onclick="updateProgress()"> <label for="q2a">A. `git checkout -b escape` (原地逃跑)</label><br>
-                    <input type="radio" name="q2" id="q2b" onclick="updateProgress()"> <label for="q2b">B. 试图 `Force Push` 知识进大脑</label><br>
+                    <input type="radio" name="q2" id="q2b" onclick="updateProgress()"> <label for="q2b">B. 试图 `Force Push` 知识进脑</label><br>
                     <input type="radio" name="q2" id="q2c" onclick="updateProgress()"> <label for="q2c">C. 摆烂，等待系统崩溃</label>
                 </div>
             </div>
@@ -49,8 +49,8 @@
             <div class="question-group">
                 <label>4. 关于“今天吃什么”？</label>
                 <div class="options">
-                    <input type="radio" name="q4" id="q4a" onclick="updateProgress()"> <label for="q4a">A. 打开外卖软件，像在批阅奏折</label><br>
-                    <input type="radio" name="q4" id="q4b" onclick="updateProgress()"> <label for="q4b">B. 谁给我发消息，我就吃谁剩下的</label><br>
+                    <input type="radio" name="q4" id="q4a" onclick="updateProgress()"> <label for="q4a">A. 打开外卖软件批阅奏折</label><br>
+                    <input type="radio" name="q4" id="q4b" onclick="updateProgress()"> <label for="q4b">B. 谁给我发消息我就吃谁剩下的</label><br>
                     <input type="radio" name="q4" id="q4c" onclick="updateProgress()"> <label for="q4c">C. 靠光合作用 (其实是穷)</label>
                 </div>
             </div>
@@ -59,8 +59,8 @@
                 <label>5. 想到十年后的自己？</label>
                 <div class="options">
                     <input type="radio" name="q5" id="q5a" onclick="updateProgress()"> <label for="q5a">A. `System 32` 已被删除</label><br>
-                    <input type="radio" name="q5" id="q5b" onclick="updateProgress()"> <label for="q5b">B. 只要我活不到那时候，就不用担心</label><br>
-                    <input type="radio" name="q5" id="q5c" onclick="updateProgress()"> <label for="q5c">C. 正在某个公园长椅上 `Read-only` 世界</label>
+                    <input type="radio" name="q5" id="q5b" onclick="updateProgress()"> <label for="q5b">B. 只要我活不到那时候就没事</label><br>
+                    <input type="radio" name="q5" id="q5c" onclick="updateProgress()"> <label for="q5c">C. 在长椅上 `Read-only` 世界</label>
                 </div>
             </div>
 
@@ -75,6 +75,7 @@
     </div>
 
     <script>
+        // 随机副标题
         const emoSayings = [
             "状态码: 418 (I'm a teapot, and I'm empty)",
             "状态码: 404 (Your happiness not found)",
@@ -87,6 +88,7 @@
             document.querySelector('.subtitle').innerText = emoSayings[Math.floor(Math.random() * emoSayings.length)];
         };
 
+        // 进度条逻辑
         function updateProgress() {
             const form = document.getElementById('survey-form');
             const checkedCount = form.querySelectorAll('input[type="radio"]:checked').length;
@@ -95,6 +97,7 @@
             if (progressPercent >= 100) document.getElementById('progress').style.backgroundColor = "#f85149";
         }
 
+        // 提交逻辑
         function submitSurvey() {
             const form = document.getElementById('survey-form');
             const checkedCount = form.querySelectorAll('input[type="radio"]:checked').length;
@@ -104,11 +107,11 @@
                 return;
             }
 
-            // 1. 播放音效
+            // 播放你上传的 ding.mp4
             const audio = document.getElementById('emo-audio');
-            audio.play().catch(e => console.log("音效由于浏览器限制未能自动播放"));
+            audio.play().catch(e => console.log("音效由于浏览器限制未能播放"));
 
-            // 2. 视觉闪烁效果
+            // 背景闪烁红色
             document.getElementById('main-body').classList.add('flash-red');
 
             const resultDiv = document.getElementById('result');
@@ -118,7 +121,7 @@
                 "检测到你正处于‘极度节能’模式，建议保持现状，因为努力也没用。",
                 "你的精神状态像一段没有注释的代码，充满了混乱但勉强能跑。",
                 "恭喜！你已成功进化为‘社交隔离器’，世界因你的沉默而安静。",
-                "评估结果：建议立即停止思考，切换至‘睡眠.exe’以保存最后一点能量。",
+                "评估结果：建议立即停止思考，切换至‘睡眠.exe’以保存能量。",
                 "你是一颗完美的螺丝钉，只是还没找到那个让你生锈的坑。"
             ];
             

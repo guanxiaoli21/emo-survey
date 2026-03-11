@@ -1,125 +1,33 @@
-body {
+body { background-color: #0d1117; color: #c9d1d9; font-family: -apple-system, sans-serif; display: flex; justify-content: center; padding: 20px; margin: 0; }
+.container { max-width: 500px; width: 100%; border: 1px solid #30363d; padding: 25px; border-radius: 8px; background-color: #161b22; }
+h1 { font-size: 20px; color: #58a6ff; margin: 0; }
+.subtitle { color: #8b949e; font-size: 12px; font-family: monospace; margin-bottom: 10px; }
+
+/* 用户名输入框样式 */
+.user-input-area { margin-bottom: 20px; }
+#username {
+    width: 100%;
     background-color: #0d1117;
-    color: #c9d1d9;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    padding: 30px 20px;
-    margin: 0;
-}
-
-.container {
-    max-width: 500px;
-    width: 100%;
     border: 1px solid #30363d;
-    padding: 30px;
-    border-radius: 8px;
-    background-color: #161b22;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-}
-
-h1 { font-size: 22px; color: #58a6ff; margin-bottom: 5px; }
-.subtitle { color: #8b949e; font-size: 13px; font-family: monospace; margin-bottom: 20px; }
-
-.progress-bar {
-    width: 100%;
-    height: 6px;
-    background-color: #30363d;
-    border-radius: 3px;
-    overflow: hidden;
-}
-.progress-fill {
-    width: 0%;
-    height: 100%;
-    background-color: #238636;
-    transition: width 0.4s ease;
-}
-
-.question-group {
-    margin-top: 30px;
-    padding-left: 15px;
-    border-left: 2px solid #30363d;
-}
-
-label { font-weight: 600; font-size: 15px; margin-bottom: 12px; display: block; }
-
-.options { line-height: 2.2; }
-.options label {
-    font-weight: 400;
-    color: #8b949e;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-input[type="radio"]:checked + label {
-    color: #58a6ff;
-    font-weight: bold;
-}
-
-button {
-    margin-top: 40px;
-    background-color: #238636;
-    color: #ffffff;
-    border: 1px solid rgba(240,246,252,0.1);
-    padding: 14px;
+    padding: 10px;
+    color: #c9d1d9;
     border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    width: 100%;
-    transition: 0.2s;
+    box-sizing: border-box;
+    outline: none;
 }
+#username:focus { border-color: #58a6ff; }
 
-button:hover { background-color: #2ea043; }
-
+.progress-bar { width: 100%; height: 5px; background-color: #30363d; border-radius: 3px; }
+.progress-fill { width: 0%; height: 100%; background-color: #238636; transition: width 0.3s; }
+.question-group { margin-top: 25px; padding-bottom: 15px; border-bottom: 1px solid #21262d; }
+label { font-weight: 600; font-size: 14px; margin-bottom: 10px; display: block; }
+.options { line-height: 2; color: #8b949e; font-size: 13px; }
+input[type="radio"]:checked + label { color: #58a6ff; font-weight: bold; }
+button { margin-top: 30px; background-color: #238636; color: white; border: 1px solid #30363d; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; }
 .hidden { display: none; }
-
-#result {
-    margin-top: 20px;
-    text-align: center;
-    animation: fadeIn 0.8s;
-}
-
-#result h3 { color: #f85149; margin-bottom: 15px; }
-#result-text { font-size: 16px; line-height: 1.6; color: #c9d1d9; }
-/* 结果弹出时的屏幕闪烁效果 */
-.flash-red {
-    animation: screenFlash 0.3s ease-out;
-}
-
-@keyframes screenFlash {
-    0% { background-color: #f85149; }
-    100% { background-color: #0d1117; }
-}
-
-.retry { color: #8b949e; margin-top: 30px; cursor: pointer; text-decoration: underline; font-size: 12px; }
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-/* 全屏红色闪烁动画 */
-.flash-red {
-    animation: screenFlash 0.4s ease-out forwards;
-}
-
-@keyframes screenFlash {
-    0% { background-color: #f85149; }
-    50% { background-color: #aa1e1e; }
-    100% { background-color: #0d1117; } /* 回到深蓝色背景 */
-}
-/* 优化结尾比心图的样式 */
-#heart-image-container img {
-    display: block; /* 居中必备 */
-    margin: 40px auto; /* 上下外边距40px，左右自动居中 */
-    max-width: 150px; /* 限制最大宽度，别太大 */
-    height: auto;
-    border-radius: 50%; /* 让黄色小人变成圆形的，更像个头像 */
-    box-shadow: 0 0 20px rgba(88, 166, 255, 0.5); /* 增加蓝色光晕，更有赛博感 */
-    animation: imageFadeIn 1s ease-out; /* 增加一个淡入动画 */
-}
-
-@keyframes imageFadeIn {
-    from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1); }
-}
+#result { text-align: center; padding: 20px; }
+#heart-image-container img { max-width: 150px; margin-top: 20px; border-radius: 10px; box-shadow: 0 0 15px rgba(88,166,255,0.2); }
+.retry { color: #8b949e; margin-top: 20px; cursor: pointer; text-decoration: underline; font-size: 11px; }
+.flash-red { animation: screenFlash 0.5s ease-out; }
+@keyframes screenFlash { 0% { background-color: #f85149; } 100% { background-color: #0d1117; } }
 

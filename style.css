@@ -33,3 +33,38 @@ button { cursor: pointer; border-radius: 6px; font-weight: bold; transition: 0.2
 @keyframes screenFlash { 0% { background: #f85149; } 100% { background: #0d1117; } }
 
 
+/* 个人面板标签化 */
+.tag {
+    background: #238636;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+.profile-card p {
+    margin: 15px 0;
+    border-bottom: 1px solid #21262d;
+    padding-bottom: 5px;
+}
+
+/* 导航按键美化 */
+.btn-void {
+    background: #161b22;
+    border: 1px solid #30363d;
+    color: #58a6ff;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.btn-void:hover {
+    border-color: #58a6ff;
+    background: #1c2128;
+}
+
+#leaderboard-list li:first-child {
+    color: #8b949e;
+    font-weight: bold;
+}

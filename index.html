@@ -10,43 +10,115 @@
     <div class="container">
         <header>
             <h1>Commit Your Soul</h1>
-            <p class="subtitle">状态码: 418 (I'm a teapot, and I'm empty)</p>
+            <p class="subtitle">正在同步精神状态...</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
         </header>
 
         <form id="survey-form">
             <div class="question-group">
                 <label>1. 今天的起床动力来源是？</label>
                 <div class="options">
-                    <input type="radio" name="q1" id="q1a"> <label for="q1a">A. 尿急 (底层驱动)</label><br>
-                    <input type="radio" name="q1" id="q1b"> <label for="q1b">B. 还没活够 (系统异常)</label><br>
-                    <input type="radio" name="q1" id="q1c"> <label for="q1c">C. 纯粹是睡不着了 (硬件老化)</label>
+                    <input type="radio" name="q1" id="q1a" onclick="updateProgress()"> <label for="q1a">A. 闹铃 (触发底层代码)</label><br>
+                    <input type="radio" name="q1" id="q1b" onclick="updateProgress()"> <label for="q1b">B. 还没活够 (系统异常)</label><br>
+                    <input type="radio" name="q1" id="q1c" onclick="updateProgress()"> <label for="q1c">C. 纯粹是睡不着了 (硬件老化)</label>
                 </div>
             </div>
 
             <div class="question-group">
                 <label>2. 面对期末考试，你的策略是？</label>
                 <div class="options">
-                    <input type="radio" name="q2" id="q2a"> <label for="q2a">A. `git checkout -b escape` (原地逃跑)</label><br>
-                    <input type="radio" name="q2" id="q2b"> <label for="q2b">B. 试图 `Force Push` 知识进大脑</label><br>
-                    <input type="radio" name="q2" id="q2c"> <label for="q2c">C. 摆烂，等待系统崩溃</label>
+                    <input type="radio" name="q2" id="q2a" onclick="updateProgress()"> <label for="q2a">A. `git checkout -b escape` (原地逃跑)</label><br>
+                    <input type="radio" name="q2" id="q2b" onclick="updateProgress()"> <label for="q2b">B. 试图 `Force Push` 知识进大脑</label><br>
+                    <input type="radio" name="q2" id="q2c" onclick="updateProgress()"> <label for="q2c">C. 摆烂，等待系统崩溃</label>
                 </div>
             </div>
 
-            <button type="button" onclick="submitSurvey()">Push to Void (提交)</button>
+            <div class="question-group">
+                <label>3. 走在路上看到不熟的同学？</label>
+                <div class="options">
+                    <input type="radio" name="q3" id="q3a" onclick="updateProgress()"> <label for="q3a">A. 掏出手机，假装业务繁忙</label><br>
+                    <input type="radio" name="q3" id="q3b" onclick="updateProgress()"> <label for="q3b">B. 低头看脚尖，研究地砖缝隙</label><br>
+                    <input type="radio" name="q3" id="q3c" onclick="updateProgress()"> <label for="q3c">C. 瞬间开启 `Stealth Mode`</label>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <label>4. 关于“今天吃什么”？</label>
+                <div class="options">
+                    <input type="radio" name="q4" id="q4a" onclick="updateProgress()"> <label for="q4a">A. 打开外卖软件，像在批阅奏折</label><br>
+                    <input type="radio" name="q4" id="q4b" onclick="updateProgress()"> <label for="q4b">B. 谁给我发消息，我就吃谁剩下的</label><br>
+                    <input type="radio" name="q4" id="q4c" onclick="updateProgress()"> <label for="q4c">C. 靠光合作用 (其实是穷)</label>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <label>5. 想到十年后的自己？</label>
+                <div class="options">
+                    <input type="radio" name="q5" id="q5a" onclick="updateProgress()"> <label for="q5a">A. `System 32` 已被删除</label><br>
+                    <input type="radio" name="q5" id="q5b" onclick="updateProgress()"> <label for="q5b">B. 只要我活不到那时候，就不用担心</label><br>
+                    <input type="radio" name="q5" id="q5c" onclick="updateProgress()"> <label for="q5c">C. 正在某个公园长椅上 `Read-only` 世界</label>
+                </div>
+            </div>
+
+            <button type="button" id="submit-btn" onclick="submitSurvey()">Push to Void (提交)</button>
         </form>
 
         <div id="result" class="hidden">
+            <h3>🔴 System Status: CRITICAL</h3>
             <p id="result-text"></p>
+            <p class="retry" onclick="location.reload()">-- 重置人生系统 (F5) --</p>
         </div>
     </div>
 
     <script>
+        const emoSayings = [
+            "状态码: 418 (I'm a teapot, and I'm empty)",
+            "状态码: 404 (Your happiness not found)",
+            "状态码: 502 (Bad Gateway to your heart)",
+            "警告：剩余快乐值不足 5%",
+            "人生是一个 Bug，但我放弃修复了"
+        ];
+
+        window.onload = function() {
+            document.querySelector('.subtitle').innerText = emoSayings[Math.floor(Math.random() * emoSayings.length)];
+        };
+
+        function updateProgress() {
+            const form = document.getElementById('survey-form');
+            const checkedCount = form.querySelectorAll('input[type="radio"]:checked').length;
+            const progressPercent = (checkedCount / 5) * 100;
+            document.getElementById('progress').style.width = progressPercent + '%';
+            if (progressPercent >= 100) document.getElementById('progress').style.backgroundColor = "#f85149";
+        }
+
         function submitSurvey() {
+            const form = document.getElementById('survey-form');
+            const checkedCount = form.querySelectorAll('input[type="radio"]:checked').length;
+            
+            if (checkedCount < 5) {
+                alert("请先填完，别想逃避这该死的人生。");
+                return;
+            }
+
             const resultDiv = document.getElementById('result');
             const resultText = document.getElementById('result-text');
+            
+            const evaluations = [
+                "检测到你正处于‘极度节能’模式，建议保持现状，因为努力也没用。",
+                "你的精神状态像一段没有注释的代码，充满了混乱但勉强能跑。",
+                "恭喜！你已成功进化为‘社交隔离器’，世界因你的沉默而安静。",
+                "评估结果：建议立即停止思考，切换至‘睡眠.exe’以保存最后一点能量。",
+                "你是一颗完美的螺丝钉，只是还没找到那个让你生锈的坑。"
+            ];
+            
+            form.classList.add('hidden');
             resultDiv.classList.remove('hidden');
-            resultText.innerText = "提交成功。数据已同步至虚无，没有人会在意的。";
+            resultText.innerText = evaluations[Math.floor(Math.random() * evaluations.length)];
+            window.scrollTo(0, 0);
         }
     </script>
 </body>
 </html>
+

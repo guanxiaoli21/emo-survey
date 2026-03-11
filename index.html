@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>虚无主义大学生状态检查</title>
+    <title>赛博大学生精神鉴定报告 (20题版)</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body id="main-body">
@@ -12,139 +12,131 @@
     <div class="container">
         <header>
             <h1>Commit Your Soul</h1>
-            <p class="subtitle">正在同步虚无感...</p>
+            <p class="subtitle">深度扫描中...</p>
+            
+            <div class="user-input-area">
+                <input type="text" id="username" placeholder="输入你的赛博代号..." />
+            </div>
+
             <div class="progress-bar">
                 <div class="progress-fill" id="progress"></div>
             </div>
         </header>
 
         <form id="survey-form">
-            <div class="question-group">
-                <label>1. 今天的起床动力来源是？</label>
-                <div class="options">
-                    <input type="radio" name="q1" id="q1a" onclick="updateProgress()"> <label for="q1a">A. 尿急 (底层驱动)</label><br>
-                    <input type="radio" name="q1" id="q1b" onclick="updateProgress()"> <label for="q1b">B. 还没活够 (系统异常)</label><br>
-                    <input type="radio" name="q1" id="q1c" onclick="updateProgress()"> <label for="q1c">C. 睡不着了 (硬件老化)</label>
-                </div>
-            </div>
-
-            <div class="question-group">
-                <label>2. 面对期末考试，你的策略是？</label>
-                <div class="options">
-                    <input type="radio" name="q2" id="q2a" onclick="updateProgress()"> <label for="q2a">A. `git checkout -b escape` (原地逃跑)</label><br>
-                    <input type="radio" name="q2" id="q2b" onclick="updateProgress()"> <label for="q2b">B. 试图 `Force Push` 知识进脑</label><br>
-                    <input type="radio" name="q2" id="q2c" onclick="updateProgress()"> <label for="q2c">C. 摆烂，等待系统崩溃</label>
-                </div>
-            </div>
-
-            <div class="question-group">
-                <label>3. 走在路上看到不熟的同学？</label>
-                <div class="options">
-                    <input type="radio" name="q3" id="q3a" onclick="updateProgress()"> <label for="q3a">A. 掏出手机，假装业务繁忙</label><br>
-                    <input type="radio" name="q3" id="q3b" onclick="updateProgress()"> <label for="q3b">B. 低头看脚尖，研究地砖缝隙</label><br>
-                    <input type="radio" name="q3" id="q3c" onclick="updateProgress()"> <label for="q3c">C. 瞬间开启 `Stealth Mode`</label>
-                </div>
-            </div>
-
-            <div class="question-group">
-                <label>4. 关于“今天吃什么”？</label>
-                <div class="options">
-                    <input type="radio" name="q4" id="q4a" onclick="updateProgress()"> <label for="q4a">A. 打开外卖软件批阅奏折</label><br>
-                    <input type="radio" name="q4" id="q4b" onclick="updateProgress()"> <label for="q4b">B. 谁给我发消息我就吃谁剩下的</label><br>
-                    <input type="radio" name="q4" id="q4c" onclick="updateProgress()"> <label for="q4c">C. 靠光合作用 (其实是穷)</label>
-                </div>
-            </div>
-
-            <div class="question-group">
-                <label>5. 想到十年后的自己？</label>
-                <div class="options">
-                    <input type="radio" name="q5" id="q5a" onclick="updateProgress()"> <label for="q5a">A. `System 32` 已被删除</label><br>
-                    <input type="radio" name="q5" id="q5b" onclick="updateProgress()"> <label for="q5b">B. 只要我活不到那时候就没事</label><br>
-                    <input type="radio" name="q5" id="q5c" onclick="updateProgress()"> <label for="q5c">C. 在长椅上 `Read-only` 世界</label>
-                </div>
-            </div>
-
-            <button type="button" id="submit-btn" onclick="submitSurvey()">Push to Void (提交)</button>
+            <div id="questions-container"></div>
+            <button type="button" id="submit-btn" onclick="submitSurvey()">上传至虚无 (提交)</button>
         </form>
 
         <div id="result" class="hidden">
             <h3>🔴 System Status: CRITICAL</h3>
-            <p id="result-text"></p>
-            <div id="heart-image-container" class="hidden">
-                </div>
+            <div id="result-header" style="color: #8b949e; font-size: 0.9em; margin-bottom: 10px;"></div>
+            <div id="result-text" style="margin: 20px 0;"></div>
+            <div id="heart-image-container">
+                <img src="image_0.png" alt="比心" onerror="this.style.display='none'">
+            </div>
             <p class="retry" onclick="location.reload()">-- 重置人生系统 (F5) --</p>
         </div>
     </div>
 
     <script>
-        const emoSayings = [
-            "状态码: 418 (I'm a teapot, and I'm empty)",
-            "状态码: 404 (Your happiness not found)",
-            "状态码: 502 (Bad Gateway to your heart)",
-            "警告：剩余快乐值不足 5%",
-            "人生是一个 Bug，但我放弃修复了"
+        const questions = [
+            { q: "起床后的第一念头？", a: "尿急", b: "还没活够", c: "为什么会有早八" },
+            { q: "面对期末考，你的策略？", a: "转发锦鲤", b: "试图硬塞知识", c: "原地逃跑" },
+            { q: "路上看到不熟的同学？", a: "假装玩手机", b: "低头看脚尖", c: "隐身模式开启" },
+            { q: "关于‘今天吃什么’？", a: "批阅外卖软件", b: "吃别人剩下的", c: "光合作用" },
+            { q: "十年后的自己？", a: "已被删除", b: "只要活不到那时就没事", c: "在长椅上看世界" },
+            { q: "手机电量低于 20% 时？", a: "疯狂找线", b: "听天由命", c: "感到一种解脱" },
+            { q: "收到‘在吗’后的反应？", a: "瞬间装死", b: "视奸朋友圈", c: "礼貌性消失" },
+            { q: "你的社交状态？", a: "只要我不尴尬", b: "盛大的自闭", c: "只读模式" },
+            { q: "周日的晚上在想什么？", a: "明天吃什么", b: "还没开始过周末", c: "世界怎么还没毁灭" },
+            { q: "对工作的态度？", a: "为了五斗米", b: "摸鱼专家", c: "电子荒原漂流者" },
+            { q: "熬夜的原因？", a: "剧太好看", b: "报复性补偿", c: "灵魂在修仙" },
+            { q: "你的存款状态？", a: "四大皆空", b: "恩格尔系数 100%", c: "负资产运行" },
+            { q: "面对突发任务？", a: "原地崩溃", b: "熟练推脱", c: "假装没看见" },
+            { q: "你的核心竞争力？", a: "能吃", b: "能睡", c: "能忍受虚无" },
+            { q: "洗澡时的活动？", a: "思考人生", b: "开演唱会", c: "单纯发呆" },
+            { q: "对‘成功’的定义？", a: "发财", b: "躺平", c: "今天没哭" },
+            { q: "你的衣柜风格？", a: "那几件轮换", b: "黑色显瘦", c: "穿得像个路人" },
+            { q: "关于旅行？", a: "朋友圈一日游", b: "酒店深度游", c: "我想去外星" },
+            { q: "面对批评？", a: "瞬间破防", b: "左耳进右耳出", c: "你说得对，但我没救了" },
+            { q: "最后，你现在的感觉？", a: "想干饭", b: "想睡觉", c: "我不应该在这里" }
         ];
 
         window.onload = function() {
-            document.querySelector('.subtitle').innerText = emoSayings[Math.floor(Math.random() * emoSayings.length)];
+            document.querySelector('.subtitle').innerText = "状态码: 418 (Teapot Empty)";
+            const container = document.getElementById('questions-container');
+            questions.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'question-group';
+                div.innerHTML = `
+                    <label>${index + 1}. ${item.q}</label>
+                    <div class="options">
+                        <input type="radio" name="q${index}" value="A" id="q${index}a" onclick="updateProgress()"> <label for="q${index}a">A. ${item.a}</label><br>
+                        <input type="radio" name="q${index}" value="B" id="q${index}b" onclick="updateProgress()"> <label for="q${index}b">B. ${item.b}</label><br>
+                        <input type="radio" name="q${index}" value="C" id="q${index}c" onclick="updateProgress()"> <label for="q${index}c">C. ${item.c}</label>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
         };
 
         function updateProgress() {
-            const form = document.getElementById('survey-form');
-            const checkedCount = form.querySelectorAll('input[type="radio"]:checked').length;
-            const progressPercent = (checkedCount / 5) * 100;
+            const checkedCount = document.querySelectorAll('input[type="radio"]:checked').length;
+            const progressPercent = (checkedCount / questions.length) * 100;
             document.getElementById('progress').style.width = progressPercent + '%';
-            if (progressPercent >= 100) document.getElementById('progress').style.backgroundColor = "#f85149";
         }
 
         function submitSurvey() {
-            const form = document.getElementById('survey-form');
-            const checkedCount = form.querySelectorAll('input[type="radio"]:checked').length;
+            const username = document.getElementById('username').value.trim();
+            const checked = document.querySelectorAll('input[type="radio"]:checked');
             
-            if (checkedCount < 5) {
-                alert("请先填完，别想逃避这该死的人生。");
+            // 校验用户名
+            if (!username) {
+                alert("请输入用户名，系统无法扫描无主灵魂。");
                 return;
             }
 
-            // 1. 音效和视觉闪烁
-            document.getElementById('emo-audio').play().catch(e => console.log("音效未播放"));
-            document.getElementById('main-body').classList.add('flash-red');
-
-            const resultDiv = document.getElementById('result');
-            const resultText = document.getElementById('result-text');
-            
-            // 2. 随机评价
-            const evaluations = [
-                "检测到你正处于‘极度节能’模式，建议保持现状，因为努力也没用。",
-                "你的精神状态像一段没有注释的代码，充满了混乱但勉强能跑。",
-                "恭喜！你已成功进化为‘社交隔离器’，世界因你的沉默而安静。",
-                "评估结果：建议立即停止思考，切换至‘睡眠.exe’以保存能量。",
-                "你是一颗完美的螺丝钉，只是还没找到那个让你生锈的坑。"
-            ];
-            
-            // 3. 动态插入比心图片
-            const imageContainer = document.getElementById('heart-image-container');
-            if (imageContainer.innerHTML.trim() === "") {
-                const img = document.createElement('img');
-                img.src = 'image_0.png'; // 这里指向你上传的文件
-                img.alt = '比心';
-                img.style.maxWidth = '100%';
-                img.style.height = 'auto';
-                img.style.marginTop = '20px';
-                img.style.borderRadius = '8px';
-                img.style.boxShadow = '0 0 15px rgba(88, 166, 255, 0.3)';
-                imageContainer.appendChild(img);
-                imageContainer.classList.remove('hidden');
+            // 特殊弹窗逻辑
+            if (username.toLowerCase() === "pluviophile") {
+                alert("I死了");
             }
 
-            form.classList.add('hidden');
+            if (checked.length < questions.length) {
+                alert(`还有 ${questions.length - checked.length} 题没答，逃避是没用的。`);
+                return;
+            }
+
+            document.getElementById('emo-audio').play().catch(e => {});
+            document.getElementById('main-body').classList.add('flash-red');
+
+            let counts = { A: 0, B: 0, C: 0 };
+            checked.forEach(input => { counts[input.value]++; });
+
+            let title, desc;
+            if (counts.C >= 10) {
+                title = "【绝对虚无主义者】(XW-ZZ)";
+                desc = "你已进化为赛博幽灵，看透了一切逻辑背后的荒诞。";
+            } else if (counts.B >= counts.A) {
+                title = "【系统延迟观察者】(YC-GZ)";
+                desc = "你在摆烂与焦虑之间反复横跳，是典型的多线程报错状态。";
+            } else {
+                title = "【生存本能驱动者】(SC-BN)";
+                desc = "虽然世界很破，但你依然靠着干饭和睡觉维持着系统运行。";
+            }
+
+            document.getElementById('survey-form').classList.add('hidden');
+            document.getElementById('username').parentElement.classList.add('hidden');
+            const resultDiv = document.getElementById('result');
+            document.getElementById('result-header').innerText = `受检用户: ${username}`;
+            document.getElementById('result-text').innerHTML = `<strong style="color: #58a6ff; font-size: 1.2em;">${title}</strong><br><br>${desc}`;
             resultDiv.classList.remove('hidden');
-            resultText.innerText = evaluations[Math.floor(Math.random() * evaluations.length)];
             window.scrollTo(0, 0);
         }
     </script>
 </body>
 </html>
+
 
 
 
